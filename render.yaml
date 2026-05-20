@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: ainewpartour-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: FRONTEND_URL
+        value: https://ainewpartour.vercel.app
+      - key: ADMIN_EMAIL
+        value: admin@ainewpartour.com
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: PROMPTPAY_ID
+        value: 0962032266
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false

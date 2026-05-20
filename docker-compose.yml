@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ainew
+      POSTGRES_PASSWORD: ainew_password
+      POSTGRES_DB: ainewpartour
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+  backend:
+    build: ./backend
+    depends_on:
+      - postgres
+    env_file:
+      - ./backend/.env.example
+    environment:
+      DATABASE_URL: postgres://ainew:ainew_password@postgres:5432/ainewpartour
+      FRONTEND_URL: http://localhost:3000
+    ports:
+      - "4000:4000"
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:4000/api
+    ports:
+      - "3000:3000"
+volumes:
+  postgres_data:
