@@ -30,6 +30,6 @@ export function createPromptPayPayload(promptPayId, amount) {
     field('53', '764') +
     field('54', Number(amount).toFixed(2)) +
     field('58', 'TH') +
-    field('63', '');
+    '6304';
   return `${payload}${crc16ccitt(payload)}`;
 }
